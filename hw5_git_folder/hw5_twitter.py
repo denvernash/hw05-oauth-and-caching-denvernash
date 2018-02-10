@@ -3,7 +3,7 @@ import json
 import sys
 import requests
 import secret_data # file that contains OAuth credentials
-# import nltk # uncomment line after you install nltk
+import nltk # uncomment line after you install nltk
 
 
 ## SI 206 - HW
@@ -13,7 +13,9 @@ import secret_data # file that contains OAuth credentials
 
 #usage should be python3 hw5_twitter.py <username> <num_tweets>
 username = sys.argv[1]
+print("USER: {}".format(username))
 num_tweets = sys.argv[2]
+print("TWEETS ANALYZED: {}".format(num_tweets))
 
 consumer_key = secret_data.CONSUMER_KEY
 consumer_secret = secret_data.CONSUMER_SECRET
@@ -33,8 +35,10 @@ requests.get(url, auth=auth)
 # initializing CACHE dictionary
 CACHE_FNAME = "twitter_cache.json"
 try:
-    with open(CACHE_FNAME) as json_data:
-        CACHE_DICTION = json.loads(json_data)
+    fname = open(CACHE_FNAME, 'r')
+    json_data = fname.read()
+    CACHE_DICTION = json.loads(json_data)
+    fname.close()
 except:
     CACHE_DICTION = {}
 
@@ -61,7 +65,7 @@ def fetch_from_twitter(screen_name, count = 20):
         twitter_data = json.loads(response.text)
         CACHE_DICTION[search_id] = twitter_data
         fname = open(CACHE_FNAME, 'w')
-        fname.write(json.dumps(CACHE_DICTION))
+        fname.write(json.dumps((CACHE_DICTION), indent=2))
         fname.close()
         return twitter_data
 
