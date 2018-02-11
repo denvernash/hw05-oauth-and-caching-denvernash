@@ -6,6 +6,7 @@ import secret_data # file that contains OAuth credentials
 import nltk # uncomment line after you install nltk
 
 
+
 ## SI 206 - HW
 ## COMMENT WITH:
 ## Your section day/time: 005/ M 1-2:30
@@ -76,9 +77,15 @@ def fetch_from_twitter(screen_name, count = 20):
 
 data = fetch_from_twitter(username, num_tweets)
 
+sentence = ""
+for dct in data:
+    sentence += dct["text"]
+
+tokens = nltk.word_tokenize(sentence)
 
 
 #Code for Part 2:Analyze Tweets
+
 
 
 
