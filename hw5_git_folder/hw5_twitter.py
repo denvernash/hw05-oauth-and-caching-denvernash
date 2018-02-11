@@ -4,6 +4,9 @@ import sys
 import requests
 import secret_data # file that contains OAuth credentials
 import nltk # uncomment line after you install nltk
+from nltk.corpus import stopwords
+import string
+stop_words = list(set(stopwords.words("english")))
 
 
 
@@ -82,11 +85,27 @@ for dct in data:
     sentence += dct["text"]
 
 tokens = nltk.word_tokenize(sentence)
-
+dist = nltk.FreqDist(tokens)
 
 #Code for Part 2:Analyze Tweets
 
+stop_words.extend(("http", "https", "RT"))
 
+
+top5 = []
+for tup in (dist.most_common()):
+    if tup[0][0].lower() not in list(string.ascii_lowercase):
+        pass
+    elif tup[0].lower() in stop_words:
+        pass
+    else:
+        top5.append(tup[0])
+    if len(top5) == 5:
+        break
+
+print('')
+print("5 most frequenly used words:")
+print(*top5, sep='\n')
 
 
 if __name__ == "__main__":
