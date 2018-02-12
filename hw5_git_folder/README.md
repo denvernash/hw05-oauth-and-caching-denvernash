@@ -3,8 +3,6 @@ SI 507
 Homework 5: OAuth and Caching
 
 
-
-
 Homework Objective:
 Know what is OAuth and how to use it
 Know how to look through API documentation and use it for making requests
