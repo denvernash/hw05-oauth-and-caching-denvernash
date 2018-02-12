@@ -100,12 +100,12 @@ for tup in (dist.most_common()):
         pass
     else:
         top5.append(tup[0])
-    if len(top5) == 5:
+        top5.append(tup[1])
+    if len(top5) == 10:
         break
 
 print('')
-print("5 most frequenly used words:")
-print(*top5, sep='\n')
+print("5 MOST FREQUENT WORDS:", "{}({}) {}({}) {}({}) {}({}) {}({})".format(*top5))
 
 
 if __name__ == "__main__":
